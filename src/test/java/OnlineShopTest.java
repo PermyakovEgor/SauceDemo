@@ -5,11 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 import java.util.HashMap;
 
-public class OnlineShop {
+public class OnlineShopTest {
 
     @Test
     public void onlineShop() {
@@ -23,6 +24,7 @@ public class OnlineShop {
         options.addArguments("--disable-popup-blocking");
         options.addArguments("--disable-infobars");
         WebDriver driver = new ChromeDriver(options);
+        SoftAssert softAssert = new SoftAssert();
 
         //Открываем страницу браузера
         driver.get("https://www.saucedemo.com/");
@@ -46,22 +48,19 @@ public class OnlineShop {
         WebElement product = driver.findElement(By.cssSelector("#inventory_container .inventory_list .inventory_item:nth-child(3) button.btn.btn_primary.btn_small.btn_inventory"));
         product.click();
 
-        WebElement Cart = driver.findElement(By.cssSelector("[data-test=shopping-cart-link]"));
-        Cart.click();
+        WebElement cart = driver.findElement(By.cssSelector("[data-test=shopping-cart-link]"));
+        cart.click();
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 
         //Проверяем соответствие названия
         WebElement nameProductInCart = driver.findElement(By.cssSelector("div.inventory_item_name"));
         String name = nameProductInCart.getText();
-        Assert.assertEquals(name, "Sauce Labs Bolt T-Shirt", "Не тот товар в корзине");
+        softAssert.assertEquals(name, "Sauce Labs Bolt T-Shirt", "Не тот товар в корзине");
 
         WebElement priceProductInCart = driver.findElement(By.xpath("//div[@class='inventory_item_price']"));
-        String price = priceProductInCart.getText();
-        Assert.assertEquals(price, "$15.99", "Стоимость товара в корзине не соответствует ожидаемой");
-
-        System.out.println("В корзине товар: " + name + ", с ценником: " + price);
-
+        priceProductInCart.getText();
+        softAssert.assertEquals(priceProductInCart, "$15.99", "Стоимость товара в корзине не соответствует ожидаемой");
 
         driver.quit();
     }
