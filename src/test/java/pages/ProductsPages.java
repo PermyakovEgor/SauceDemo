@@ -34,15 +34,11 @@ public class ProductsPages extends BasePage{
         super(driver);
     }
 
-    public void open () {
-        driver.get(BASE_URL + "/inventory.html");
-    }
-
     public String getTitle() {
         return driver.findElement(TITLE).getText();
     }
 
-    public void add_few_card () {
+    public void addFewСard () {
         List<WebElement> elements = driver.findElements(ADD_FEE_ITEM);
         WebElement firstElement = elements.get(0);
         WebElement fourthElement = elements.get(3);
@@ -52,13 +48,13 @@ public class ProductsPages extends BasePage{
         sixElement.click();
     }
 
-    public boolean add_to_card () {
+    public boolean addToCard () {
         driver.findElement(ADD_TO_CARD).click();
         WebElement removeButton = driver.findElement(REMOVE_FROM_CARD);
         return removeButton.isDisplayed(); //Если нашли кнопку REMOVE_FROM_CARD возвращаем true, иначе false
     }
 
-    public boolean remove_from_card () {
+    public boolean removeFromCard () {
         driver.findElement(REMOVE_FROM_CARD).click();
         WebElement addButton = driver.findElement(ADD_TO_CARD);
         return addButton.isDisplayed(); //Если нашли кнопку ADD_TO_CARD возвращаем true, иначе false
@@ -82,8 +78,7 @@ public class ProductsPages extends BasePage{
         return button_back;
     }
 
-    public String LogOut () {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public String logOut () {
         driver.findElement(BURGER_MENU_BTN).click();
         WebElement logbutton = wait.until(ExpectedConditions.elementToBeClickable(BURGER_MENU_LOGOUT));
         logbutton.click();
@@ -91,7 +86,7 @@ public class ProductsPages extends BasePage{
         return logbut;
     }
 
-    public boolean Sort_A_Z () {
+    public boolean sortAZ () {
         List<WebElement> productElements = driver.findElements(SAVE_ITEMS_FOR_SORT_BY_NAME);
         List<String> productNames = new ArrayList<>();
         for (WebElement element : productElements) {
@@ -107,7 +102,7 @@ public class ProductsPages extends BasePage{
         }
     }
 
-    public boolean Sort_Z_A () {
+    public boolean sortZA () {
         WebElement selectElement = driver.findElement(SELECT_SORT);
         Select dropdown = new Select(selectElement);
         dropdown.selectByValue("za");
@@ -127,7 +122,7 @@ public class ProductsPages extends BasePage{
         }
     }
 
-    public boolean sort_Low_High () {
+    public boolean sortLowHigh () {
         WebElement selectElement = driver.findElement(SELECT_SORT);
         Select dropdown = new Select(selectElement);
         dropdown.selectByValue("lohi");
@@ -147,7 +142,7 @@ public class ProductsPages extends BasePage{
         }
     }
 
-    public boolean sort_High_Low () {
+    public boolean sortHighLow () {
         WebElement selectElement = driver.findElement(SELECT_SORT);
         Select dropdown = new Select(selectElement);
         dropdown.selectByValue("hilo");
@@ -167,5 +162,4 @@ public class ProductsPages extends BasePage{
             return false;
         }
     }
-
 }

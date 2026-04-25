@@ -11,7 +11,7 @@ public class ProductPageTest extends BaseTest {
     public void checkItemOnnCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        boolean isAdded = productsPages.add_to_card();
+        boolean isAdded = productsPages.addToCard();
         assertTrue(isAdded, "Товар не добавлен в корзину, со страницы с товарами");
     }
 
@@ -20,8 +20,8 @@ public class ProductPageTest extends BaseTest {
     public void checkItemNotOnCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPages.add_to_card();
-        boolean isRemove = productsPages.remove_from_card();
+        productsPages.addToCard();
+        boolean isRemove = productsPages.removeFromCard();
         assertTrue(isRemove, "Товар не удален из корзины, со страницы с товарами");
     }
 
@@ -55,39 +55,38 @@ public class ProductPageTest extends BaseTest {
     public void checkLogOut() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        assertEquals(productsPages.LogOut(), "login-button", "Не происходит разлогин");
+        assertEquals(productsPages.logOut(), "login-button", "Не происходит разлогин");
     }
 
     //7. Проверка сортировки по алфавиту, возрастание
     @Test
-    public void checkSort_A_Z() {
+    public void checkSortAZ() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        assertTrue(productsPages.Sort_A_Z(), "Отсортировано не в алфавитном порядке");
+        assertTrue(productsPages.sortZA(), "Отсортировано не в алфавитном порядке");
     }
 
     //8. Проверка сортировки по алфавиту, убывание
     @Test
-    public void checkSort_Z_A() {
+    public void checkSortZA() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        assertTrue(productsPages.Sort_Z_A(), "Отсортировано не в порядке Z-A");
+        assertTrue(productsPages.sortZA(), "Отсортировано не в порядке Z-A");
     }
 
     //9. Проверка сортировки по цене, возрастание
     @Test
-    public void checkSort_Low_High() {
+    public void checkSortLowHigh() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        assertTrue(productsPages.sort_Low_High(), "Отсортировано не в порядке увеличения цены");
+        assertTrue(productsPages.sortLowHigh(), "Отсортировано не в порядке увеличения цены");
     }
 
     //10. Проверка сортировки по цене, убывание
     @Test
-    public void checkSort_High_Low() {
+    public void checkSortHighLow() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        assertTrue(productsPages.sort_High_Low(), "Отсортировано не в порядке убывания цены");
+        assertTrue(productsPages.sortHighLow(), "Отсортировано не в порядке убывания цены");
     }
-
 }

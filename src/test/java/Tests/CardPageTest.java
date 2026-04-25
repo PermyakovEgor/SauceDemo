@@ -11,7 +11,7 @@ public class CardPageTest extends BaseTest{
     public void checkOneItemInCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPages.add_to_card();
+        productsPages.addToCard();
         productsPages.openCard();
         assertEquals(cardPage.getCartItem(), 1, "В корзине должен быть 1 товар");
     }
@@ -21,7 +21,7 @@ public class CardPageTest extends BaseTest{
     public void checkThreeItemInCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPages.add_few_card();
+        productsPages.addFewСard();
         productsPages.openCard();
         assertEquals(cardPage.getCartItem(), 3, "В корзине должно быть 3 товара");
     }
@@ -31,7 +31,7 @@ public class CardPageTest extends BaseTest{
     public void checkItemsAfterRemove() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPages.add_few_card();
+        productsPages.addFewСard();
         productsPages.openCard();
         cardPage.checkItemsAfterRemove(1);
         assertEquals(cardPage.getCartItem(), 2, "В корзине после удаления должно быть 2 товара");
