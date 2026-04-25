@@ -29,8 +29,8 @@ public class CardPage extends BasePage{
 
     public void checkItemsAfterRemove(int number) {
         List<WebElement> elements = driver.findElements(REMOVEITEMINCARD);
-        WebElement firstElement = elements.get(number);
-        firstElement.click();
+        WebElement anyElement = elements.get(number);
+        anyElement.click();
     }
 
     public void openCheckout () {
