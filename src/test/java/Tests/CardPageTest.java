@@ -6,8 +6,7 @@ import static org.testng.Assert.assertTrue;
 
 public class CardPageTest extends BaseTest{
 
-    //1. Добавление одного товара в корзину
-    @Test
+    @Test(testName = "Добавление товара в корзину", description = "Добавление товара в корзину со страницы Products")
     public void checkOneItemInCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -16,8 +15,8 @@ public class CardPageTest extends BaseTest{
         assertEquals(cardPage.getCartItem(), 1, "В корзине должен быть 1 товар");
     }
 
-    //2. Добавление трех товаров в корзину
-    @Test
+    @Test(testName = "Добавление нескольких товаров в корзину", description = "Добавление трех товаров в корзину со страницы Products",
+            dependsOnMethods = "checkOneItemInCart")
     public void checkThreeItemInCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -26,8 +25,8 @@ public class CardPageTest extends BaseTest{
         assertEquals(cardPage.getCartItem(), 3, "В корзине должно быть 3 товара");
     }
 
-    //3. Удаление одного из товаров
-    @Test
+    @Test(testName = "Удаление товаров из корзины", description = "Проверка удаления товаров из корзины после добавления со страницы Products",
+            groups = {"smoke"})
     public void checkItemsAfterRemove() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -37,8 +36,8 @@ public class CardPageTest extends BaseTest{
         assertEquals(cardPage.getCartItem(), 2, "В корзине после удаления должно быть 2 товара");
     }
 
-    //4. Проверить Checkout
-    @Test
+    @Test(testName = "Оформление заказа", description = "Проверка оформления заказа Checkout из корзины",
+            groups = {"smoke"})
     public void checkOpenCheckout() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -47,8 +46,7 @@ public class CardPageTest extends BaseTest{
         assertEquals(checkoutPage.getTitleCheckout(), "Checkout: Your Information", "Не открывается оформление товара");
     }
 
-    //5. Проверить кнопку Continue Shopping - пока не трогал
-    @Test
+    @Test(testName = "Проверка кнопки Continue Shopping", description = "Проверка кнопки Continue Shopping для возвращения из корзины к страницы Products")
     public void checkContinueShopping() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");

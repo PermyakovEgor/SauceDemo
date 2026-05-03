@@ -1,13 +1,14 @@
 package Tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 public class CheckoutTest extends BaseTest{
 
-    //1. Успешный ввод в Checkout: Your Information
-    @Test
+    @Test(testName = "Your Information - успешный ввод", description = "Успешный ввод при оформлении товара в Checkout: Your Information и переход к Overview",
+            groups = {"smoke"})
     public void checkInputCheckout() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -17,8 +18,7 @@ public class CheckoutTest extends BaseTest{
         assertEquals(checkoutPage.getTitleCheckout(), "Checkout: Overview", "После заполнения полей, не переходит в Overview");
     }
 
-    //2. Проверка кнопки Cancel в Checkout: Your Information
-    @Test
+    @Test(testName = "Your Information - кнопка Cancel", description = "Возвращение в Products из Checkout: Your Information при нажатии Cancel")
     public void checkCancelButton1() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -28,8 +28,8 @@ public class CheckoutTest extends BaseTest{
         assertEquals(cardPage.getTitleCard(), "Your Cart", "Не переходит в корзину");
     }
 
-    //3. Проверка кнопки Cancel в Checkout: Overview
-    @Test
+    @Test(testName = "Overview - кнопка Cancel", description = "Возвращение в корзину из Checkout: Overview при нажатии Cancel",
+    dependsOnMethods = "checkInputCheckout")
     public void checkCancelButton2() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -40,8 +40,8 @@ public class CheckoutTest extends BaseTest{
         assertEquals(cardPage.getTitleCard(), "Products", "Не переходит к странице продуктов");
     }
 
-    //4. Проверка кнопки Finish в Checkout: Overview
-    @Test
+    @Test(testName = "Overview - кнопка Finish", description = "Возвращение в корзину из Checkout: Overview при нажатии Cancel",
+            dependsOnMethods = "checkInputCheckout", groups = {"smoke"})
     public void checkFinishButton() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -49,11 +49,11 @@ public class CheckoutTest extends BaseTest{
         cardPage.openCheckout();
         checkoutPage.inputCheckout("Егор", "Пермяков","234");
         checkoutPage.putFinish();
-        assertEquals(cardPage.getTitleCard(), "Checkout: Complete!", "Не переходит в корзину");
+        assertEquals(cardPage.getTitleCard(), "Checkout: Complete!", "не подтверждается оформление товара");
     }
 
-    //5. Проверка кнопки  BackHome в Checkout: Complete
-    @Test
+    @Test(testName = "Checkout: Complete - кнопка BackHome", description = "Возвращение к странице Products из Checkout: Complete при нажатии BackHome",
+            dependsOnMethods = "checkFinishButton")
     public void checkBachHomeButton() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -62,39 +62,28 @@ public class CheckoutTest extends BaseTest{
         checkoutPage.inputCheckout("Егор", "Пермяков","234");
         checkoutPage.putFinish();
         checkoutPage.putBackHome();
-        assertEquals(cardPage.getTitleCard(), "Products", "Не переходит в корзину");
+        assertEquals(cardPage.getTitleCard(), "Products", "Не переходит к странице продуктов");
     }
 
-    //6. Ввод в Checkout: Your Information без имени
-    @Test
-    public void checkInputWithoutName() {
+
+    //Данные для оформления заказа
+    @DataProvider(name = "Тестовые данные для негативного оформления заказа")
+    public Object [][]  loginData() {
+        return new Object[][] {
+                {"", "Пермяков", "234", "Error: First Name is required"},
+                {"Егор", "", "234", "Error: Last Name is required"},
+                {"Егор", "пермяков", "", "Error: Postal Code is required"}
+        };
+    }
+
+    @Test(testName = "Checkout: Your Information - пустое имя", description = "Получение ошибки в Checkout: Your Information при оставлении поля 'Имя' пустым",
+    dataProvider = "Тестовые данные для негативного оформления заказа")
+    public void checkInputWithoutName(String firstName, String lastName, String zip, String errorMessage) {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         productsPages.openCard();
         cardPage.openCheckout();
-        checkoutPage.inputCheckout("", "Пермяков","234");
-        assertEquals(loginPage.getErrorMessage(), "Error: First Name is required", "После пропуска имени в форме не появляется ошибка");
-    }
-
-    //7. Ввод в Checkout: Your Information без фамилии
-    @Test
-    public void checkInputWithoutLastName() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
-        cardPage.openCheckout();
-        checkoutPage.inputCheckout("Егор", "","234");
-        assertEquals(loginPage.getErrorMessage(), "Error: Last Name is required", "После пропуска фамилии в форме не появляется ошибка");
-    }
-
-    //8. Ввод в Checkout: Your Information без кода индекс
-    @Test
-    public void checkInputWithoutPostCode() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
-        cardPage.openCheckout();
-        checkoutPage.inputCheckout("Егор", "Пермяков","");
-        assertEquals(loginPage.getErrorMessage(), "Error: Postal Code is required", "После пропуска почтового индекса в форме не появляется ошибка");
+        checkoutPage.inputCheckout(firstName, lastName,zip);
+        assertEquals(loginPage.getErrorMessage(), errorMessage, "Не появляется ошибка при некорректном оформлении заказа");
     }
 }

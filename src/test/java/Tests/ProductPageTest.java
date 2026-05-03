@@ -6,17 +6,17 @@ import static org.testng.Assert.assertTrue;
 
 public class ProductPageTest extends BaseTest {
 
-    //1. Добавление товара в корзину
-    @Test
-    public void checkItemOnnCart() {
+    @Test(testName = "Добавление товара в корзину", description = "Проверка добавление товара в корзину со страницы Products",
+            groups = {"smoke"})
+    public void checkItemOnCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         boolean isAdded = productsPages.addToCard();
         assertTrue(isAdded, "Товар не добавлен в корзину, со страницы с товарами");
     }
 
-    //2. Удаление товара из корзины
-    @Test
+    @Test(testName = "Удаление товара из корзины", description = "Проверка удаление товара из корзины со страницы Products",
+            dependsOnMethods = "checkItemOnCart")
     public void checkItemNotOnCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -25,8 +25,8 @@ public class ProductPageTest extends BaseTest {
         assertTrue(isRemove, "Товар не удален из корзины, со страницы с товарами");
     }
 
-    //3. Переход в корзину
-    @Test
+    @Test(testName = "Вход в корзину", description = "Проверка перехода в корзину при нажатии на тележку",
+            groups = {"smoke"})
     public void checkOpenCard() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -34,48 +34,43 @@ public class ProductPageTest extends BaseTest {
         assertEquals(cardPage.getTitleCard(), "Your Cart", "Не переходит в корзину");
     }
 
-    //4. Переход к карточке товара по названию
-    @Test
+    @Test(testName = "Переход к карточке товара по названию", description = "Проверка перехода к карточке товара при нажатии на название товара",
+            groups = {"smoke"})
     public void checkOpenItemOnName() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         assertEquals(productsPages.openItemOnName(), "Back to products", "не переходит в карточку товара по названию");
     }
 
-    //5. Переход к карточке товара по иконке
-    @Test
+    @Test(testName = "Переход к карточке товара по иконке", description = "Проверка перехода к карточке товара при нажатии на иконку товара")
     public void checkOpenItemOnIcon() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         assertEquals(productsPages.openItemOnIcon(), "Back to products", "не переходит в карточку товара по иконке");
     }
 
-    //6. Переход к карточке товара по иконке
-    @Test
+    @Test(testName = "Разлогин", description = "Проверка разлогина с сайта со страницы Products")
     public void checkLogOut() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         assertEquals(productsPages.logOut(), "login-button", "Не происходит разлогин");
     }
 
-    //7. Проверка сортировки по алфавиту, возрастание
-    @Test
+    @Test(testName = "Сортировка по алфавиту", description = "Проверка корректной сортировки товаров на странице по алфавиту")
     public void checkSortAZ() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        assertTrue(productsPages.sortZA(), "Отсортировано не в алфавитном порядке");
+        assertTrue(productsPages.sortAZ(), "Отсортировано не в алфавитном порядке");
     }
 
-    //8. Проверка сортировки по алфавиту, убывание
-    @Test
+    @Test(testName = "Сортировка по алфавиту убывание", description = "Проверка корректной сортировки товаров на странице по алфавиту в обратном порядке")
     public void checkSortZA() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
         assertTrue(productsPages.sortZA(), "Отсортировано не в порядке Z-A");
     }
 
-    //9. Проверка сортировки по цене, возрастание
-    @Test
+    @Test(testName = "Сортировка по возрастанию цены", description = "Проверка корректной сортировки товаров на странице по взрастанию цены")
     public void checkSortLowHigh() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -83,7 +78,7 @@ public class ProductPageTest extends BaseTest {
     }
 
     //10. Проверка сортировки по цене, убывание
-    @Test
+    @Test(testName = "Сортировка по убыванию цены", description = "Проверка корректной сортировки товаров на странице по убыванию цены")
     public void checkSortHighLow() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");

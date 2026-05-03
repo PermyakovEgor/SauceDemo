@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo"
+       parallel="tests">
+
+    <test name="Chrome">
+        <classes>
+            <class name = "Tests.LoginTest"/>
+            <class name = "Tests.ProductPageTest"/>
+            <parameter name="browser" value="chrome"/>
+        </classes>
+    </test>
+
+    <test name="FireFox">
+        <classes>
+            <class name = "Tests.CardPageTest"/>
+            <class name = "Tests.CheckoutTest"/>
+            <parameter name="browser" value="firefox"/>
+        </classes>
+    </test>
+</suite>
