@@ -5,16 +5,16 @@
 
     <test name="Chrome">
         <classes>
-            <class name = "Tests.LoginTest"/>
-            <class name = "Tests.ProductPageTest"/>
+            <class name = "tests.LoginTest"/>
+            <class name = "tests.ProductPageTest"/>
             <parameter name="browser" value="chrome"/>
         </classes>
     </test>
 
     <test name="FireFox">
         <classes>
-            <class name = "Tests.CardPageTest"/>
-            <class name = "Tests.CheckoutTest"/>
+            <class name = "tests.CardPageTest"/>
+            <class name = "tests.CheckoutTest"/>
             <parameter name="browser" value="firefox"/>
         </classes>
     </test>

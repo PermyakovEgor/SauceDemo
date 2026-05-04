@@ -15,7 +15,8 @@
         <testng.version>7.12.0</testng.version>
         <selenium.version>4.43.0</selenium.version>
         <assertj.version>3.27.7</assertj.version>
-        <suiteXmlFile>C:\Users\Perffi\IdeaProjects\SauceDemo\pom.xml</suiteXmlFile>
+        <suiteXmlFile>IdeaProjects\SauceDemo\src\test\resources\crossBrowserTesting.xml</suiteXmlFile>
+        <suiteXmlFile>IdeaProjects\SauceDemo\src\test\resources\testng.xml</suiteXmlFile>
     </properties>
 
     <dependencies>

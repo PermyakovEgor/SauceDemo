@@ -10,7 +10,7 @@
         </groups>
         <packages>
             <package name="pages.*"/>
-            <package name="Tests.*"/>
+            <package name="tests.*"/>
         </packages>
     </test>
 </suite>
