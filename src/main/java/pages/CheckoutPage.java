@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,6 +19,7 @@ public class CheckoutPage extends BasePage{
     private final By FINISH_BUTTON = By.xpath("//*[@data-test='finish']");
     private final By BACKHOMEBUTTON = By.xpath("//*[@data-test='back-to-products']");
 
+    @Step("Открытие страницы Оформления заказа")
     public String getTitleCheckout() {
         return driver.findElement(TITLECHECKOUT).getText();
     }
@@ -29,14 +31,17 @@ public class CheckoutPage extends BasePage{
         driver.findElement(CONTINUE_BUTTON).click();
     }
 
+    @Step("Проверка кнопки Отмена")
     public void putCancel () {
         driver.findElement(CANCEL_BUTTON).click();
     }
 
+    @Step("Проверка кнопки Финиш")
     public void putFinish () {
         driver.findElement(FINISH_BUTTON).click();
     }
 
+    @Step("Проверка кнопки Вернуться Домой")
     public void putBackHome () {
         driver.findElement(BACKHOMEBUTTON).click();
     }

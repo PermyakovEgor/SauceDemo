@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,8 @@ public class ProductsPages extends BasePage{
 
     private final By TITLE = By.cssSelector("[data-test=title]");
     private final By ADD_FEE_ITEM =By.xpath("//button[contains(text(), 'Add to cart')]");
+    private final String ADD_TO_CART_PATTERN =
+            "//*[text()='%s']/ancestor::div[@class='inventory_item']//button[text()='Add to cart']";
     private final By ADD_TO_CARD = By.xpath("//*[@data-test='add-to-cart-sauce-labs-bike-light']");
     private final By REMOVE_FROM_CARD = By.xpath("//*[@data-test='remove-sauce-labs-bike-light']");
     private final By GO_TO_CARD = By.cssSelector("#shopping_cart_container > a");
@@ -38,32 +41,17 @@ public class ProductsPages extends BasePage{
         return driver.findElement(TITLE).getText();
     }
 
-    public void addFewСard () {
-        List<WebElement> elements = driver.findElements(ADD_FEE_ITEM);
-        WebElement firstElement = elements.get(0);
-        WebElement fourthElement = elements.get(3);
-        WebElement sixElement = elements.get(5);
-        firstElement.click();
-        fourthElement.click();
-        sixElement.click();
+    @Step("Добавление товара с названием '{product}' в корзину")
+    public void addToCart(String product) {
+        driver.findElement(By.xpath(String.format(ADD_TO_CART_PATTERN, product))).click();
     }
 
-    public boolean addToCard () {
-        driver.findElement(ADD_TO_CARD).click();
-        WebElement removeButton = driver.findElement(REMOVE_FROM_CARD);
-        return removeButton.isDisplayed(); //Если нашли кнопку REMOVE_FROM_CARD возвращаем true, иначе false
-    }
-
-    public boolean removeFromCard () {
-        driver.findElement(REMOVE_FROM_CARD).click();
-        WebElement addButton = driver.findElement(ADD_TO_CARD);
-        return addButton.isDisplayed(); //Если нашли кнопку ADD_TO_CARD возвращаем true, иначе false
-    }
-
+    @Step("Открытие страницы Корзина")
     public void openCard () {
         driver.findElement(GO_TO_CARD).click();
     }
 
+    @Step("Открытие карточки товара по Названию")
     public String openItemOnName () {
         WebElement link = driver.findElement(GO_TO_ITEM_NAME);
         link.click();
@@ -71,6 +59,7 @@ public class ProductsPages extends BasePage{
         return button_back;
     }
 
+    @Step("Открытие карточки товара по иконке")
     public String openItemOnIcon () {
         WebElement link = driver.findElement(GO_TO_ITEM_IMG);
         link.click();
@@ -78,6 +67,7 @@ public class ProductsPages extends BasePage{
         return button_back;
     }
 
+    @Step("Разлогин")
     public String logOut () {
         driver.findElement(BURGER_MENU_BTN).click();
         WebElement logbutton = wait.until(ExpectedConditions.elementToBeClickable(BURGER_MENU_LOGOUT));
@@ -86,6 +76,7 @@ public class ProductsPages extends BasePage{
         return logbut;
     }
 
+    @Step("Сортировка по алфавиту")
     public boolean sortAZ () {
         List<WebElement> productElements = driver.findElements(SAVE_ITEMS_FOR_SORT_BY_NAME);
         List<String> productNames = new ArrayList<>();
@@ -102,6 +93,7 @@ public class ProductsPages extends BasePage{
         }
     }
 
+    @Step("Сортировка по алфавиту в обратном порядке")
     public boolean sortZA () {
         WebElement selectElement = driver.findElement(SELECT_SORT);
         Select dropdown = new Select(selectElement);
@@ -122,6 +114,7 @@ public class ProductsPages extends BasePage{
         }
     }
 
+    @Step("Сортировка по возрастанию цены")
     public boolean sortLowHigh () {
         WebElement selectElement = driver.findElement(SELECT_SORT);
         Select dropdown = new Select(selectElement);
@@ -142,6 +135,7 @@ public class ProductsPages extends BasePage{
         }
     }
 
+    @Step("Сортировка по убыванию цены")
     public boolean sortHighLow () {
         WebElement selectElement = driver.findElement(SELECT_SORT);
         Select dropdown = new Select(selectElement);
