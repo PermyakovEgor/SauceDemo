@@ -19,10 +19,10 @@ public class ProductPageTest extends BaseTest {
     @Issue("SouceDemo_CheckProductPage")
     @Owner("Permyakov Egor")
     public void checkItemOnCart() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.addToCart("Sauce Labs Backpack");
-        productsPages.openCard();
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .addToCart("Sauce Labs Backpack")
+                .openCard();
         assertEquals(cardPage.getCartItem(),1, "В корзину добавлен товар");
     }
 
@@ -38,11 +38,11 @@ public class ProductPageTest extends BaseTest {
     @Issue("SouceDemo_CheckProductPage")
     @Owner("Permyakov Egor")
     public void checkItemNotOnCart() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.addToCart("Sauce Labs Backpack");
-        productsPages.openCard();
-        cardPage.removeFromCart("Sauce Labs Backpack");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .addToCart("Sauce Labs Backpack")
+                .openCard()
+                .removeFromCart("Sauce Labs Backpack");
         assertEquals(cardPage.getCartItem(),0, "Товар не удален из корзины, со страницы с товарами");
     }
 
@@ -58,9 +58,9 @@ public class ProductPageTest extends BaseTest {
     @Issue("SouceDemo_CheckProductPage")
     @Owner("Permyakov Egor")
     public void checkOpenCard() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .openCard();
         assertEquals(cardPage.getTitleCard(), "Your Cart", "Не переходит в корзину");
     }
 
@@ -76,8 +76,8 @@ public class ProductPageTest extends BaseTest {
     @Issue("SouceDemo_CheckProductPage")
     @Owner("Permyakov Egor")
     public void checkOpenItemOnName() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce");
         assertEquals(productsPages.openItemOnName(), "Back to products", "не переходит в карточку товара по названию");
     }
 
@@ -92,8 +92,8 @@ public class ProductPageTest extends BaseTest {
     @Issue("SouceDemo_CheckProductPage")
     @Owner("Permyakov Egor")
     public void checkOpenItemOnIcon() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce");
         assertEquals(productsPages.openItemOnIcon(), "Back to products", "не переходит в карточку товара по иконке");
     }
 
@@ -108,8 +108,8 @@ public class ProductPageTest extends BaseTest {
     @Issue("SouceDemo_CheckProductPage")
     @Owner("Permyakov Egor")
     public void checkLogOut() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce");
         assertEquals(productsPages.logOut(), "login-button", "Не происходит разлогин");
     }
 
@@ -124,8 +124,8 @@ public class ProductPageTest extends BaseTest {
     @Issue("SouceDemo_CheckProductPage")
     @Owner("Permyakov Egor")
     public void checkSortAZ() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce");
         assertTrue(productsPages.sortAZ(), "Отсортировано не в алфавитном порядке");
     }
 
@@ -140,8 +140,8 @@ public class ProductPageTest extends BaseTest {
     @Issue("SouceDemo_CheckProductPage")
     @Owner("Permyakov Egor")
     public void checkSortZA() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce");
         assertTrue(productsPages.sortZA(), "Отсортировано не в порядке Z-A");
     }
 
@@ -156,8 +156,8 @@ public class ProductPageTest extends BaseTest {
     @Issue("SouceDemo_CheckProductPage")
     @Owner("Permyakov Egor")
     public void checkSortLowHigh() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce");
         assertTrue(productsPages.sortLowHigh(), "Отсортировано не в порядке увеличения цены");
     }
 
@@ -173,8 +173,8 @@ public class ProductPageTest extends BaseTest {
     @Issue("SouceDemo_CheckProductPage")
     @Owner("Permyakov Egor")
     public void checkSortHighLow() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce");
         assertTrue(productsPages.sortHighLow(), "Отсортировано не в порядке убывания цены");
     }
 }

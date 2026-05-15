@@ -28,17 +28,19 @@ public class LoginPage extends BasePage{
     }
 
     @Step("Открытие страницы Login")
-    public void open() {
+    @Override
+    public LoginPage isPageOpened() {
         driver.get(BASE_URL);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_PAGE));
+        return this;
     }
 
     @Step("Вход в магазин с именем пользователя '{user}' и паролем '{password}'")
-    public void login(String user, String password) {
+    public ProductsPages login(String user, String password) {
         driver.findElement(USERNAME_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
+        return new ProductsPages(driver);
     }
 
     @Step("Получение текста ошибки")

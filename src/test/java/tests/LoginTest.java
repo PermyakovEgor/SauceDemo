@@ -23,8 +23,8 @@ public class LoginTest extends BaseTest{
     @Flaky
     @Owner("Permyakov Egor")
     public void CheckLoginWithValid() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce");
         assertEquals(productsPages.getTitle(), "Products", "Не происходит авторизация");
     }
 
@@ -49,8 +49,8 @@ public class LoginTest extends BaseTest{
     @Issue("SouceDemo_CheckLogin")
     @Owner("Permyakov Egor")
     public void CheckLoginWithNegativeCred(String user, String password, String errorMessage) {
-        loginPage.open();
-        loginPage.login(user, password);
+        loginPage.isPageOpened()
+                .login(user, password);
         assertEquals(loginPage.getErrorMessage(), errorMessage, "Не получаем ошибку авторизации");
     }
 }

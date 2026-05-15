@@ -19,11 +19,11 @@ public class CheckoutTest extends BaseTest{
     @TmsLink("SouceDemo_Checkout")
     @Issue("SouceDemo_Checkout")
     public void checkInputCheckout() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
-        cardPage.openCheckout();
-        checkoutPage.inputCheckout("Егор", "Пермяков","234");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .openCard()
+                .openCheckout()
+                .inputCheckout("Егор", "Пермяков","234");
         assertEquals(checkoutPage.getTitleCheckout(), "Checkout: Overview", "После заполнения полей, не переходит в Overview");
     }
 
@@ -37,11 +37,11 @@ public class CheckoutTest extends BaseTest{
     @TmsLink("SouceDemo_Checkout")
     @Issue("SouceDemo_Checkout")
     public void checkCancelButton1() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
-        cardPage.openCheckout();
-        checkoutPage.putCancel();
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .openCard()
+                .openCheckout()
+                .putCancel();
         assertEquals(cardPage.getTitleCard(), "Your Cart", "Не переходит в корзину");
     }
 
@@ -56,12 +56,12 @@ public class CheckoutTest extends BaseTest{
     @TmsLink("SouceDemo_Checkout")
     @Issue("SouceDemo_Checkout")
     public void checkCancelButton2() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
-        cardPage.openCheckout();
-        checkoutPage.inputCheckout("Егор", "Пермяков","234");
-        checkoutPage.putCancel();
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .openCard()
+                .openCheckout()
+                .inputCheckout("Егор", "Пермяков","234")
+                .putCancel();
         assertEquals(cardPage.getTitleCard(), "Products", "Не переходит к странице продуктов");
     }
 
@@ -76,13 +76,13 @@ public class CheckoutTest extends BaseTest{
     @TmsLink("SouceDemo_Checkout")
     @Issue("SouceDemo_Checkout")
     public void checkFinishButton() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
-        cardPage.openCheckout();
-        checkoutPage.inputCheckout("Егор", "Пермяков","234");
-        checkoutPage.putFinish();
-        assertEquals(cardPage.getTitleCard(), "Checkout: Complete!1", "не подтверждается оформление товара");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .openCard()
+                .openCheckout()
+                .inputCheckout("Егор", "Пермяков","234")
+                .putFinish();
+        assertEquals(cardPage.getTitleCard(), "Checkout: Complete!", "не подтверждается оформление товара");
     }
 
     @Test(testName = "Checkout: Complete - кнопка BackHome", description = "Возвращение к странице Products из Checkout: Complete при нажатии BackHome",
@@ -96,13 +96,13 @@ public class CheckoutTest extends BaseTest{
     @TmsLink("SouceDemo_Checkout")
     @Issue("SouceDemo_Checkout")
     public void checkBachHomeButton() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
-        cardPage.openCheckout();
-        checkoutPage.inputCheckout("Егор", "Пермяков","234");
-        checkoutPage.putFinish();
-        checkoutPage.putBackHome();
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .openCard()
+                .openCheckout()
+                .inputCheckout("Егор", "Пермяков","234")
+                .putFinish()
+                .putBackHome();
         assertEquals(cardPage.getTitleCard(), "Products", "Не переходит к странице продуктов");
     }
 
@@ -129,11 +129,11 @@ public class CheckoutTest extends BaseTest{
     @Flaky
     @Issue("SouceDemo_Checkout")
     public void checkInputWithoutName(String firstName, String lastName, String zip, String errorMessage) {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
-        cardPage.openCheckout();
-        checkoutPage.inputCheckout(firstName, lastName,zip);
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .openCard()
+                .openCheckout()
+                .inputCheckout(firstName, lastName,zip);
         assertEquals(loginPage.getErrorMessage(), errorMessage, "Не появляется ошибка при некорректном оформлении заказа");
     }
 }

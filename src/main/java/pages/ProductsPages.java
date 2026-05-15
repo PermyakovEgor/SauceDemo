@@ -37,18 +37,29 @@ public class ProductsPages extends BasePage{
         super(driver);
     }
 
+    @Step("Открытие страницы Login")
+    @Override
+    public ProductsPages isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TITLE));
+        return this;
+    }
+
+    @Step("Возврат текста TITLE страницы Продуктов")
     public String getTitle() {
+        isPageOpened();
         return driver.findElement(TITLE).getText();
     }
 
     @Step("Добавление товара с названием '{product}' в корзину")
-    public void addToCart(String product) {
+    public ProductsPages addToCart(String product) {
         driver.findElement(By.xpath(String.format(ADD_TO_CART_PATTERN, product))).click();
+        return this;
     }
 
     @Step("Открытие страницы Корзина")
-    public void openCard () {
+    public CardPage openCard () {
         driver.findElement(GO_TO_CARD).click();
+        return new CardPage(driver);
     }
 
     @Step("Открытие карточки товара по Названию")

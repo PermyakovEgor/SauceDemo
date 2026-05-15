@@ -3,6 +3,7 @@ package pages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CardPage extends BasePage{
 
@@ -17,14 +18,22 @@ public class CardPage extends BasePage{
         super(driver);
     }
 
+    @Step("Открытие страницы корзины")
+    @Override
+    public CardPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(TITLECARD));
+        return this;
+    }
+
     @Step("Удаление товара из корзины по названию '{product}'")
     public String removeFromCart(String product) {
         driver.findElement(By.xpath(String.format(REMOVE_FROM_CART_PATTERN, product))).click();
         return product;
     }
 
-    @Step("Открытие страницы корзины")
+    @Step("Возврат текста TITLE со страницы корзины")
     public String getTitleCard() {
+        isPageOpened();
         return driver.findElement(TITLECARD).getText();
     }
 
@@ -34,12 +43,14 @@ public class CardPage extends BasePage{
     }
 
     @Step("Открытие SidePage оформления заказа")
-    public void openCheckout () {
+    public CheckoutPage openCheckout () {
         driver.findElement(CHECKOUT).click();
+        return new CheckoutPage(driver);
     }
 
     @Step("Проверка кнопки Continue Shopping в корзине")
-    public void backToShopping () {
+    public ProductsPages backToShopping () {
         driver.findElement(CONTINUESHOPPING).click();
+        return new ProductsPages(driver);
     }
 }

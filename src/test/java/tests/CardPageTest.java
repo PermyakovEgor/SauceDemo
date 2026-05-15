@@ -18,10 +18,10 @@ public class CardPageTest extends BaseTest{
     @Issue("SouceDemo_CheckCardPage")
     @Owner("Permyakov Egor")
     public void checkOneItemInCart() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.addToCart("Sauce Labs Backpack");
-        productsPages.openCard();
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .addToCart("Sauce Labs Backpack")
+                .openCard();
         assertEquals(cardPage.getCartItem(), 1, "В корзине должен быть 1 товар");
     }
 
@@ -38,12 +38,12 @@ public class CardPageTest extends BaseTest{
     @Flaky
     @Owner("Permyakov Egor")
     public void checkThreeItemInCart() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.addToCart("Sauce Labs Backpack");
-        productsPages.addToCart("Sauce Labs Fleece Jacket");
-        productsPages.addToCart("Test.allTheThings() T-Shirt (Red)");
-        productsPages.openCard();
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .addToCart("Sauce Labs Backpack")
+                .addToCart("Sauce Labs Fleece Jacket")
+                .addToCart("Test.allTheThings() T-Shirt (Red)")
+                .openCard();
         assertEquals(cardPage.getCartItem(), 3, "В корзине должно быть 3 товара");
     }
 
@@ -59,13 +59,13 @@ public class CardPageTest extends BaseTest{
     @Issue("SouceDemo_CheckCardPage")
     @Owner("Permyakov Egor")
     public void checkItemsAfterRemove() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.addToCart("Sauce Labs Backpack");
-        productsPages.addToCart("Sauce Labs Fleece Jacket");
-        productsPages.addToCart("Test.allTheThings() T-Shirt (Red)");
-        productsPages.openCard();
-        cardPage.removeFromCart("Test.allTheThings() T-Shirt (Red)");
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .addToCart("Sauce Labs Backpack")
+                .addToCart("Sauce Labs Fleece Jacket")
+                .addToCart("Test.allTheThings() T-Shirt (Red)")
+                .openCard()
+                .removeFromCart("Test.allTheThings() T-Shirt (Red)");
         assertEquals(cardPage.getCartItem(), 2, "В корзине после удаления должно быть 2 товара");
     }
 
@@ -80,10 +80,10 @@ public class CardPageTest extends BaseTest{
     @TmsLink("SouceDemo_CheckCardPage")
     @Issue("SouceDemo_CheckCardPage")
     public void checkOpenCheckout() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
-        cardPage.openCheckout();
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .openCard()
+                .openCheckout();
         assertEquals(checkoutPage.getTitleCheckout(), "Checkout: Your Information", "Не открывается оформление товара");
     }
 
@@ -97,10 +97,10 @@ public class CardPageTest extends BaseTest{
     @TmsLink("SouceDemo_CheckCardPage")
     @Issue("SouceDemo_CheckCardPage")
     public void checkContinueShopping() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPages.openCard();
-        cardPage.backToShopping();
+        loginPage.isPageOpened()
+                .login("standard_user", "secret_sauce")
+                .openCard()
+                .backToShopping();
         assertEquals(productsPages.getTitle(), "Products", "Не возвращается к странице товаров из корзины");
     }
 }
