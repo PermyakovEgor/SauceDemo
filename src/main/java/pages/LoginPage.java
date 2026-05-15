@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,18 +27,23 @@ public class LoginPage extends BasePage{
         super(driver);
     }
 
-    public void open() {
+    @Step("Открытие страницы Login")
+    @Override
+    public LoginPage isPageOpened() {
         driver.get(BASE_URL);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_PAGE));
+        return this;
     }
 
-    public void login(String user, String password) {
+    @Step("Вход в магазин с именем пользователя '{user}' и паролем '{password}'")
+    public ProductsPages login(String user, String password) {
         driver.findElement(USERNAME_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
+        return new ProductsPages(driver);
     }
 
+    @Step("Получение текста ошибки")
     public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
