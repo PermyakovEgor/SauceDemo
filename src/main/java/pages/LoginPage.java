@@ -1,15 +1,12 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
+@Log4j2
 public class LoginPage extends BasePage{
 
     /*
@@ -30,6 +27,7 @@ public class LoginPage extends BasePage{
     @Step("Открытие страницы Login")
     @Override
     public LoginPage isPageOpened() {
+        log.info("Open Login Page");
         driver.get(BASE_URL);
         wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_PAGE));
         return this;
@@ -37,6 +35,7 @@ public class LoginPage extends BasePage{
 
     @Step("Вход в магазин с именем пользователя '{user}' и паролем '{password}'")
     public ProductsPages login(String user, String password) {
+        log.info("Login SouceDemo with username '{}'", user);
         driver.findElement(USERNAME_FIELD).sendKeys(user);
         driver.findElement(PASSWORD_FIELD).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
@@ -45,6 +44,7 @@ public class LoginPage extends BasePage{
 
     @Step("Получение текста ошибки")
     public String getErrorMessage() {
+        log.info("Return error text after login with broken data");
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 }

@@ -18,7 +18,9 @@
         <suiteXmlFile>IdeaProjects\SauceDemo\src\test\resources\crossBrowserTesting.xml</suiteXmlFile>
         <suiteXmlFile>IdeaProjects\SauceDemo\src\test\resources\testng.xml</suiteXmlFile>
         <allure.version>2.24.0</allure.version>
+        <log4j-core.version>2.26.0</log4j-core.version>
         <aspectj.version>1.9.20.1</aspectj.version>
+        <jackson-dataformat-yaml.version>2.12.3</jackson-dataformat-yaml.version>
     </properties>
 
     <!-- Add allure-bom to dependency management to ensure correct versions of all the dependencies are used -->
@@ -64,6 +66,26 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
+        </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.26.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>2.12.3</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.46</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
