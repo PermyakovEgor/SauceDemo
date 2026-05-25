@@ -15,8 +15,6 @@
         <testng.version>7.12.0</testng.version>
         <selenium.version>4.43.0</selenium.version>
         <assertj.version>3.27.7</assertj.version>
-        <suiteXmlFile>src\test\resources\crossBrowserTesting.xml</suiteXmlFile>
-        <suiteXmlFile>src\test\resources\testng.xml</suiteXmlFile>
         <allure.version>2.24.0</allure.version>
         <log4j-core.version>2.26.0</log4j-core.version>
         <aspectj.version>1.9.20.1</aspectj.version>
@@ -97,7 +95,8 @@
                 <version>3.5.5</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                        <suiteXmlFile>src\test\resources\crossBrowserTesting.xml</suiteXmlFile>
+                        <suiteXmlFile>src\test\resources\testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
