@@ -13,12 +13,12 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        log.error("======================================== STARTING TEST  '{}' ========================================%n", iTestResult.getName());
+        log.warn("======================================== STARTING TEST  '{}' ========================================%n", iTestResult.getName());
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        log.info("======================================== FINISHED TEST '{}' Duration: '{}' ========================================%n", iTestResult.getName(),
+        log.warn("======================================== FINISHED TEST '{}' Duration: '{}' ========================================%n", iTestResult.getName(),
                 getExecutionTime(iTestResult));
     }
 
@@ -33,7 +33,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        log.warn("======================================== SKIPPING TEST '{}' ========================================%n", iTestResult.getName());
+        log.error("======================================== SKIPPING TEST '{}' ========================================%n", iTestResult.getName());
     }
 
     @Override
