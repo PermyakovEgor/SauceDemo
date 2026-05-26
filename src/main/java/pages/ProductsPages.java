@@ -20,7 +20,7 @@ public class ProductsPages extends BasePage{
     private final String ADD_TO_CART_PATTERN =
             "//*[text()='%s']/ancestor::div[@class='inventory_item']//button[text()='Add to cart']";
     private final By GO_TO_CARD = By.cssSelector("#shopping_cart_container > a");
-    private final By GO_TO_ITEM_IMG = By.id("item_5_img_link1");
+    private final By GO_TO_ITEM_IMG = By.id("item_5_img_link");
     private final By BACK_TO_PRODUCTS = By.id("back-to-products");
     private final By GO_TO_ITEM_NAME = By.id("item_5_title_link");
     private final By SAVE_ITEMS_FOR_SORT_BY_NAME = By.xpath("//div[@class='inventory_item_name ' and @data-test='inventory-item-name']");

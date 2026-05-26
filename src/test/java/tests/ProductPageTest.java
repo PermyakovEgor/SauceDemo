@@ -93,7 +93,7 @@ public class ProductPageTest extends BaseTest {
     @Owner("Permyakov Egor")
     public void checkOpenItemOnIcon() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce");
+                .login(user, password);
         assertEquals(productsPages.openItemOnIcon(), "Back to products", "не переходит в карточку товара по иконке");
     }
 
@@ -109,7 +109,7 @@ public class ProductPageTest extends BaseTest {
     @Owner("Permyakov Egor")
     public void checkLogOut() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce");
+                .login(user, password);
         assertEquals(productsPages.logOut(), "login-button", "Не происходит разлогин");
     }
 
@@ -125,7 +125,7 @@ public class ProductPageTest extends BaseTest {
     @Owner("Permyakov Egor")
     public void checkSortAZ() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce");
+                .login(user, password);
         assertTrue(productsPages.sortAZ(), "Отсортировано не в алфавитном порядке");
     }
 
@@ -141,7 +141,7 @@ public class ProductPageTest extends BaseTest {
     @Owner("Permyakov Egor")
     public void checkSortZA() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce");
+                .login(user, password);
         assertTrue(productsPages.sortZA(), "Отсортировано не в порядке Z-A");
     }
 
@@ -157,7 +157,7 @@ public class ProductPageTest extends BaseTest {
     @Owner("Permyakov Egor")
     public void checkSortLowHigh() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce");
+                .login(user, password);
         assertTrue(productsPages.sortLowHigh(), "Отсортировано не в порядке увеличения цены");
     }
 
@@ -174,7 +174,7 @@ public class ProductPageTest extends BaseTest {
     @Owner("Permyakov Egor")
     public void checkSortHighLow() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce");
+                .login(user, password);
         assertTrue(productsPages.sortHighLow(), "Отсортировано не в порядке убывания цены");
     }
 }

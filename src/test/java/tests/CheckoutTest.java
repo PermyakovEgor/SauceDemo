@@ -57,7 +57,7 @@ public class CheckoutTest extends BaseTest{
     @Issue("SouceDemo_Checkout")
     public void checkCancelButton2() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .openCard()
                 .openCheckout()
                 .inputCheckout("Егор", "Пермяков","234")
@@ -77,7 +77,7 @@ public class CheckoutTest extends BaseTest{
     @Issue("SouceDemo_Checkout")
     public void checkFinishButton() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .openCard()
                 .openCheckout()
                 .inputCheckout("Егор", "Пермяков","234")
@@ -97,7 +97,7 @@ public class CheckoutTest extends BaseTest{
     @Issue("SouceDemo_Checkout")
     public void checkBachHomeButton() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .openCard()
                 .openCheckout()
                 .inputCheckout("Егор", "Пермяков","234")
@@ -130,7 +130,7 @@ public class CheckoutTest extends BaseTest{
     @Issue("SouceDemo_Checkout")
     public void checkInputWithoutName(String firstName, String lastName, String zip, String errorMessage) {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .openCard()
                 .openCheckout()
                 .inputCheckout(firstName, lastName,zip);

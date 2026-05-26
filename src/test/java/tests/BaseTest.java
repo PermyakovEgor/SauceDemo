@@ -13,6 +13,7 @@ import pages.CardPage;
 import pages.CheckoutPage;
 import pages.LoginPage;
 import pages.ProductsPages;
+import utils.PropertyReader;
 import utils.TestListener;
 
 import java.util.HashMap;
@@ -25,6 +26,9 @@ public class BaseTest {
     ProductsPages productsPages;
     CardPage cardPage;
     CheckoutPage checkoutPage;
+
+    protected String user = System.getProperty("user", PropertyReader.getProperty("user"));
+    protected String password = System.getProperty("password", PropertyReader.getProperty("password"));
 
     @Parameters({"browser"})
     @BeforeMethod (groups = {"smoke"}, description = "Настройка браузера")

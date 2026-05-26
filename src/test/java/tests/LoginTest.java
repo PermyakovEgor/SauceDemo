@@ -24,15 +24,15 @@ public class LoginTest extends BaseTest{
     @Owner("Permyakov Egor")
     public void CheckLoginWithValid() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce");
+                .login(user, password);
         assertEquals(productsPages.getTitle(), "Products", "Не происходит авторизация");
     }
 
     @DataProvider(name = "Тестовые данные для негативного логина")
     public Object [][]  loginData() {
         return new Object[][] {
-                {"standard_user", "", "Epic sadface: Password is required"},
-                {"", "secret_sauce", "Epic sadface: Username is required"},
+                {user, "", "Epic sadface: Password is required"},
+                {"", password, "Epic sadface: Username is required"},
                 {"test", "test", "Epic sadface: Username and password do not match any user in this service"}
         };
     }

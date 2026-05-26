@@ -19,7 +19,7 @@ public class CardPageTest extends BaseTest{
     @Owner("Permyakov Egor")
     public void checkOneItemInCart() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .addToCart("Sauce Labs Backpack")
                 .openCard();
         assertEquals(cardPage.getCartItem(), 1, "В корзине должен быть 1 товар");
@@ -39,7 +39,7 @@ public class CardPageTest extends BaseTest{
     @Owner("Permyakov Egor")
     public void checkThreeItemInCart() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .addToCart("Sauce Labs Backpack")
                 .addToCart("Sauce Labs Fleece Jacket")
                 .addToCart("Test.allTheThings() T-Shirt (Red)")
@@ -60,7 +60,7 @@ public class CardPageTest extends BaseTest{
     @Owner("Permyakov Egor")
     public void checkItemsAfterRemove() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .addToCart("Sauce Labs Backpack")
                 .addToCart("Sauce Labs Fleece Jacket")
                 .addToCart("Test.allTheThings() T-Shirt (Red)")
@@ -81,7 +81,7 @@ public class CardPageTest extends BaseTest{
     @Issue("SouceDemo_CheckCardPage")
     public void checkOpenCheckout() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .openCard()
                 .openCheckout();
         assertEquals(checkoutPage.getTitleCheckout(), "Checkout: Your Information", "Не открывается оформление товара");
@@ -98,7 +98,7 @@ public class CardPageTest extends BaseTest{
     @Issue("SouceDemo_CheckCardPage")
     public void checkContinueShopping() {
         loginPage.isPageOpened()
-                .login("standard_user", "secret_sauce")
+                .login(user, password)
                 .openCard()
                 .backToShopping();
         assertEquals(productsPages.getTitle(), "Products", "Не возвращается к странице товаров из корзины");
